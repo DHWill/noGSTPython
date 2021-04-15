@@ -20,6 +20,7 @@ def main():
     s.bind(('127.0.0.1', 5014))
     
     
+<<<<<<< HEAD
     #while 1:
     seg, addr = s.recvfrom(MAX_DGRAM)
     #print(seg >> 0 & 8)
@@ -39,6 +40,20 @@ def main():
     print("quantTableLength:", quantTableLength)
     quantizationTable, _image = _image[:quantTableLength], _image[quantTableLength:]
     print("quantizationTable:", quantizationTable)
+=======
+    while 1:
+        seg, addr = s.recvfrom(MAX_DGRAM)
+        dataIn = np.frombuffer(seg, dtype=np.uint8)
+        _image = (len(dataIn) - ((width * height)  * 3))
+        header, image = dataIn[:_image], dataIn[_image:]
+        print("TWOT", seg)
+
+        image = np.frombuffer(image, dtype=np.uint8)
+        image = image.reshape(([height, width, 3]))
+        cv2.imshow("image",image)
+        print(header)
+        #print(60/_total)
+>>>>>>> 780081fea657bc97b9d3f42896e8a2deb5adfaa6
 
     print("image length", len(_image))
     print("image", _image)
